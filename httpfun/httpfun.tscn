@@ -1,0 +1,215 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://httpfun.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "upload_successful"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("uploadStatus:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("uploadComplete:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0.5, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="httpfun" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="get" type="Button" parent="."]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 357.0
+margin/top = 306.0
+margin/right = 393.0
+margin/bottom = 326.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "GET"
+flat = false
+
+[node name="post" type="Button" parent="."]
+
+visibility/visible = false
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 577.0
+margin/top = 312.0
+margin/right = 622.0
+margin/bottom = 332.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "POST"
+flat = false
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="score" type="Label" parent="hud"]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 338.0
+margin/top = 180.0
+margin/right = 384.0
+margin/bottom = 196.0
+text = "Score: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="time" type="Label" parent="hud"]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 328.0
+margin/top = 123.0
+margin/right = 368.0
+margin/bottom = 137.0
+text = "Time: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="uploadStatus" type="Label" parent="hud"]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 195.0
+margin/top = 399.0
+margin/right = 442.0
+margin/bottom = 413.0
+custom_colors/font_color = Color( 1, 0.304688, 0, 1 )
+text = "UploadScore, this may take a minute..."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="uploadComplete" type="Label" parent="hud"]
+
+visibility/opacity = 0.0
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 185.0
+margin/top = 401.0
+margin/right = 420.0
+margin/bottom = 415.0
+custom_colors/font_color = Color( 0.0960083, 0.945313, 0, 1 )
+text = "Upload Complete, thanks for playing!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="upload_animation" type="AnimationPlayer" parent="hud"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/upload_successful = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="username_label" type="Label" parent="hud"]
+
+rect/scale = Vector2( 4, 4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 42.0
+margin/top = 25.0
+margin/right = 116.0
+margin/bottom = 39.0
+text = "Username: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="usernameInput" type="TextEdit" parent="hud/username_label"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 72.0
+margin/top = -3.0
+margin/right = 183.0
+margin/bottom = 21.0
+syntax_highlighting = false
+show_line_numbers = false
+highlight_all_occurrences = false
+caret/block_caret = false
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="usernameConfirm" type="Button" parent="hud/username_label"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 188.0
+margin/top = -1.0
+margin/right = 239.0
+margin/bottom = 19.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "POST!"
+flat = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+use_threads = false
+body_size_limit = -1
+max_redirects = 8
+
+[connection signal="pressed" from="get" to="." method="_on_get_pressed"]
+
+[connection signal="pressed" from="hud/username_label/usernameConfirm" to="." method="_on_usernameConfirm_pressed"]
+
+
