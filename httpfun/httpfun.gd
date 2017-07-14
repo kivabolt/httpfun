@@ -22,7 +22,7 @@ func _ready():
 	#hiding upload messages
 	get_node("hud/uploadStatus").set_opacity(0)
 	
-	print("Starting GET REQUEST")
+	print("Starting GET REQUEST 1")
 	getRequest()
 	pass
 
@@ -31,7 +31,8 @@ func getRequest():
 	var http = HTTPClient.new() # Create the Client
 	
 	# Connect to host/port
-	var err=http.connect("http://meehak.com",80)
+	#var err=http.connect("meehak.com",80)
+	var err=http.connect("meehak.com",80)
 	assert(err==OK) # Make sure connection was OK
 	
 	# Wait until resolved and connected
@@ -42,6 +43,8 @@ func getRequest():
 	
 	assert( http.get_status() == HTTPClient.STATUS_CONNECTED ) # Could not connect
 	
+	
+	
 	# Some headers
 	var headers=["User-Agent: Pirulo/1.0 (Godot)","Accept: */*"]
 
@@ -49,6 +52,7 @@ func getRequest():
 	var url="/squared.php"
 	#var HEADERS = ["Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(fields.length())]
 	#err = http.request(HTTPClient.METHOD_GET, url, headers)
+	print("KICKING OFF GET REQUEST 01")
 	err = http.request(HTTPClient.METHOD_GET, url, headers)
 	
 	
@@ -103,7 +107,7 @@ func createStringFields():
 	fields ="username=" + username + "&highscore=" + str(best_score) + "&gametime=" + str(elapsed)
 	print("Creating FIELDS string")
 	print(fields)
-	fields = ""
+	#fields = ""
 	print("Trying to connect ")
 
 
